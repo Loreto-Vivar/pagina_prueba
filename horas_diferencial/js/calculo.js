@@ -35,6 +35,43 @@
         actualizarResumen();
     }
 
+    function limpiarMatricula() {
+        totalNEET = 0;
+        totalNEEP = 0;
+        actualizarResumen();
+        const mensajeError = document.getElementById("mensajeError");
+        if (mensajeError) mensajeError.innerText = "";
+    }
+
+    function quitarEstudiante() {
+        const tipo = document.getElementById("tipoEstudiante").value;
+        const mensajeError = document.getElementById("mensajeError");
+        mensajeError.innerText = "";
+
+        if (!tipo) {
+            mensajeError.innerText = "Debe seleccionar un tipo para quitar.";
+            return;
+        }
+
+        if (tipo === "NEET") {
+            if (totalNEET > 0) {
+                totalNEET--;
+            } else {
+                mensajeError.innerText = "No hay más estudiantes NEET para quitar.";
+            }
+        }
+
+        if (tipo === "NEEP") {
+            if (totalNEEP > 0) {
+                totalNEEP--;
+            } else {
+                mensajeError.innerText = "No hay más estudiantes NEEP para quitar.";
+            }
+        }
+
+        actualizarResumen();
+    }
+
     function actualizarResumen() {
         // Horas pedagógicas
         const pedaNEET = totalNEET * horasPedaPorNEET;

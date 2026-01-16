@@ -162,6 +162,66 @@ select:focus {
     transform: translateY(0);
 }
 
+.botones-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.botones-principales {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.btn-warning {
+    width: 100%;
+    padding: 14px;
+    background: #fff7ed;
+    color: #c2410c;
+    border: 1px solid #fdba74;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-warning:hover {
+    background: #ffedd5;
+    border-color: #fb923c;
+    transform: translateY(-1px);
+}
+
+.btn-quitar {
+    width: 100%;
+    padding: 12px;
+    background: #f8fafc;
+    color: #94a3b8;
+    border: 1px solid #e2e8f0;
+    border-radius: var(--radius-md);
+    font-weight: 500;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-quitar:hover {
+    background: #fee2e2;
+    color: #ef4444;
+    border-color: #fecaca;
+}
+
+
+
 /* Grid & Stats */
 .stats-grid {
     display: grid;

@@ -32,9 +32,19 @@
                 </select>
             </div>
 
-            <button class="btn-primary" onclick="agregarEstudiante()">
-                <span class="icon">+</span> Agregar a la Matrícula
-            </button>
+            <div class="botones-container">
+                <div class="botones-principales">
+                    <button class="btn-primary" onclick="agregarEstudiante()">
+                        <span class="icon">+</span> Agregar
+                    </button>
+                    <button class="btn-warning" onclick="quitarEstudiante()">
+                        <span class="icon">-</span> Quitar
+                    </button>
+                </div>
+                <button class="btn-quitar" onclick="limpiarMatricula()">
+                    <span class="icon">↺</span> Reiniciar Todo
+                </button>
+            </div>
 
             <div class="error" id="mensajeError"></div>
         </section>
