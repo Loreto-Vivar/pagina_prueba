@@ -1,5 +1,8 @@
 const selectorTabla = document.getElementById("selectorTabla");
 const buscadorHC = document.getElementById("buscadorHC");
+const buscadorHA = document.getElementById("buscadorHA");
+const btnLimpiarHC = document.getElementById("limpiarHC");
+const btnLimpiarHA = document.getElementById("limpiarHA");
 const contenedoresTabla = document.querySelectorAll("[data-tabla]");
 
 selectorTabla.addEventListener("change", () => {
@@ -10,30 +13,91 @@ selectorTabla.addEventListener("change", () => {
             contenedor.dataset.tabla === seleccion ? "block" : "none";
     });
 
-    buscadorHC.value = "";
+    // Reset buscadores
+    limpiarBuscadores();
+    
     buscadorHC.disabled = seleccion === "";
-    document.body.classList.remove("buscando"); // Reset buscando state
+    buscadorHA.disabled = seleccion === "";
+    
+    document.body.classList.remove("buscando");
+    
+    // Limpiar mensajes de no resultados
+    document.querySelectorAll(".no-resultados").forEach(m => m.remove());
 });
 
-buscadorHC.addEventListener("input", () => {
-    const valor = buscadorHC.value.trim();
+function limpiarBuscadores() {
+    buscadorHC.value = "";
+    buscadorHA.value = "";
+    btnLimpiarHC.classList.remove("visible");
+    btnLimpiarHA.classList.remove("visible");
+}
+
+function filtrarTabla(valor, columnaIndex, inputId) {
     const contenedorActivo = document.querySelector(
         "[data-tabla]:not([style*='display: none'])"
     );
 
+    // Manejar visibilidad del botón de limpiar
+    const btnLimpiar = inputId === "buscadorHC" ? btnLimpiarHC : btnLimpiarHA;
     if (valor !== "") {
-        document.body.classList.add("buscando");
+        btnLimpiar.classList.add("visible");
     } else {
-        document.body.classList.remove("buscando");
+        btnLimpiar.classList.remove("visible");
     }
 
     if (!contenedorActivo) return;
 
     const filas = contenedorActivo.querySelectorAll(".tabla tbody tr");
+    let encontrados = 0;
 
     filas.forEach(fila => {
-        const hc = fila.cells[0].innerText.trim();
-        fila.style.display =
-            valor === "" || hc === valor ? "" : "none";
+        const celda = fila.cells[columnaIndex].innerText.trim();
+        const coincide = valor === "" || celda === valor;
+        fila.style.display = coincide ? "" : "none";
+        if (coincide && valor !== "") encontrados++;
     });
+
+    if (valor !== "") {
+        document.body.classList.add("buscando");
+        
+        let mensajeNoResultados = contenedorActivo.querySelector(".no-resultados");
+        if (encontrados === 0) {
+            if (!mensajeNoResultados) {
+                mensajeNoResultados = document.createElement("p");
+                mensajeNoResultados.className = "no-resultados";
+                mensajeNoResultados.innerText = "No se encontraron resultados para esta búsqueda.";
+                contenedorActivo.appendChild(mensajeNoResultados);
+            }
+        } else if (mensajeNoResultados) {
+            mensajeNoResultados.remove();
+        }
+    } else {
+        document.body.classList.remove("buscando");
+        const mensajeNoResultados = contenedorActivo.querySelector(".no-resultados");
+        if (mensajeNoResultados) mensajeNoResultados.remove();
+    }
+}
+
+buscadorHC.addEventListener("input", () => {
+    buscadorHA.value = ""; 
+    btnLimpiarHA.classList.remove("visible");
+    filtrarTabla(buscadorHC.value.trim(), 0, "buscadorHC");
+});
+
+buscadorHA.addEventListener("input", () => {
+    buscadorHC.value = ""; 
+    btnLimpiarHC.classList.remove("visible");
+    filtrarTabla(buscadorHA.value.trim(), 1, "buscadorHA");
+});
+
+btnLimpiarHC.addEventListener("click", () => {
+    buscadorHC.value = "";
+    btnLimpiarHC.classList.remove("visible");
+    filtrarTabla("", 0, "buscadorHC");
+});
+
+btnLimpiarHA.addEventListener("click", () => {
+    buscadorHA.value = "";
+    btnLimpiarHA.classList.remove("visible");
+    filtrarTabla("", 1, "buscadorHA");
 });

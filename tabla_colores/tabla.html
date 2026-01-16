@@ -28,11 +28,26 @@
             </select>
         </div>
 
+        <!--Buscador por jornada semanal  -->
         <div class="bloque-buscador">
             <label>Buscar por jornada semanal :</label>
-            <input type="number" id="buscadorHC" placeholder="Ej: 44" disabled>
+            <div class="input-grupo">
+                <input type="number" id="buscadorHC" placeholder="Ej: 44" disabled>
+                <button type="button" class="btn-limpiar" id="limpiarHC" title="Limpiar">✕</button>
+            </div>
         </div>
 
+        <!--Buscador por horas lectivas  -->
+        <div class="bloque-buscador">
+            <label>Buscar por horas lectivas :</label>
+            <div class="input-grupo">
+                <input type="number" id="buscadorHA" placeholder="Ej: 43" disabled>
+                <button type="button" class="btn-limpiar" id="limpiarHA" title="Limpiar">✕</button>
+            </div>
+        </div>
+
+
+        <!--Tablas actualizadas-->
         <div data-tabla="actual" style="display: none;">
             <h2>Tabla Actual Proporción 75/25</h2>
             <table class="tabla">
@@ -410,7 +425,7 @@
                 <thead>
                     <tr>
                         <th rowspan="2">Horas Semanales<br>(HC)</th>
-                        <th colspan="3">Proporción 75 / 25</th>
+                        <th colspan="4">Proporción 70 / 30</th>
 
                     </tr>
                     <tr>
@@ -786,7 +801,7 @@
                 <thead>
                     <tr>
                         <th rowspan="2">Horas Semanales<br>(HC)</th>
-                        <th colspan="3">Tabla 2019 proporción 65 / 35</th>
+                        <th colspan="4">Tabla 2019 proporción 65 / 35</th>
 
                     </tr>
                     <tr>
@@ -1161,7 +1176,7 @@
                 <thead>
                     <tr>
                         <th rowspan="2">Horas Semanales<br>(HC)</th>
-                        <th colspan="3">Proporción 75 / 25</th>
+                        <th colspan="4">Tabla 2019 proporción 60 / 40</th>
                     </tr>
                     <tr>
                         <th>Lectivas (HA)</th>

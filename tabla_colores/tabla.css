@@ -1,5 +1,6 @@
 :root {
-    --primary: #93c5fd; /* Soft Blue */
+    --primary: #93c5fd;
+    /* Soft Blue */
     --primary-light: #dbeafe;
     --bg-pastel: #f8fafc;
     --card-bg: #ffffff;
@@ -7,10 +8,14 @@
     --text-muted: #64748b;
     --border: #e2e8f0;
     /* Pastel Accents */
-    --accent-1: #fecaca; /* Red/Pink */
-    --accent-2: #bbf7d0; /* Green */
-    --accent-3: #fef08a; /* Yellow */
-    --accent-4: #ddd6fe; /* Purple */
+    --accent-1: #fecaca;
+    /* Red/Pink */
+    --accent-2: #bbf7d0;
+    /* Green */
+    --accent-3: #fef08a;
+    /* Yellow */
+    --accent-4: #ddd6fe;
+    /* Purple */
 }
 
 body {
@@ -81,7 +86,8 @@ label {
     display: block;
 }
 
-select, input {
+select,
+input {
     padding: 0.75rem 1rem;
     border: 2px solid white;
     border-radius: 0.75rem;
@@ -90,20 +96,62 @@ select, input {
     transition: all 0.2s;
     width: 100%;
     max-width: 350px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-select:focus, input:focus {
+select:focus,
+input:focus {
     border-color: var(--primary);
     outline: none;
     box-shadow: 0 4px 12px rgba(147, 197, 253, 0.3);
 }
 
+.input-grupo {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    max-width: 350px;
+}
+
+.btn-limpiar {
+    background: #f1f5f9;
+    color: #94a3b8;
+    border: 1px solid var(--border);
+    width: 38px;
+    height: 38px;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    transition: all 0.2s;
+    flex-shrink: 0;
+    opacity: 0;
+    pointer-events: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.btn-limpiar.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.btn-limpiar:hover {
+    background: #fee2e2;
+    color: #ef4444;
+    border-color: #fecaca;
+    transform: scale(1.05);
+}
+
+
+
 /* FORMATO DE TABLA REQUISITO */
 .tabla {
     width: 100%;
     border-collapse: separate;
-    border-spacing: 0 8px; /* Separación entre filas para un look moderno */
+    border-spacing: 0 8px;
+    /* Separación entre filas para un look moderno */
     margin-top: 1.5rem;
 }
 
@@ -147,36 +195,99 @@ select:focus, input:focus {
     background-color: #f1f5f9;
 }
 
-/* FILTRO "MÁS GRANDE" */
-/* Cuando el buscador tiene valor, hacemos que las filas visibles sean prominentes */
+/* FILTRO DE BÚSQUEDA - RESALTADO */
+body.buscando .tabla tr:not([style*="display: none"]) {
+    transition: all 0.3s ease;
+}
+
 body.buscando .tabla tr:not([style*="display: none"]) td {
-    font-size: 1.5rem !important;
-    padding: 2.5rem 1.5rem !important;
-    border: 3px solid var(--primary) !important;
-    background: #fff !important;
-    animation: pulse 1.5s infinite ease-in-out;
+    background-color: #fff !important;
+    border-top: 2px solid var(--primary) !important;
+    border-bottom: 2px solid var(--primary) !important;
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(147, 197, 253, 0.2);
+    position: relative;
+    z-index: 1;
 }
 
 body.buscando .tabla tr:not([style*="display: none"]) td:first-child {
+    border-left: 2px solid var(--primary) !important;
     background: var(--primary-light) !important;
     color: #1e40af !important;
 }
 
-@keyframes pulse {
-    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(147, 197, 253, 0.4); }
-    50% { transform: scale(1.02); box-shadow: 0 10px 30px rgba(147, 197, 253, 0.2); }
-    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(147, 197, 253, 0); }
+body.buscando .tabla tr:not([style*="display: none"]) td:last-child {
+    border-right: 2px solid var(--primary) !important;
 }
 
+@keyframes highlight-pulse {
+    0% {
+        background-color: #fff;
+    }
+
+    50% {
+        background-color: var(--primary-light);
+    }
+
+    100% {
+        background-color: #fff;
+    }
+}
+
+
 /* Colores Pastel para las columnas */
-.tabla td:nth-child(2) { background-color: #fffaf0; } /* HA */
-.tabla td:nth-child(3) { background-color: #f0fdf4; } /* Lectivas */
-.tabla td:nth-child(4) { background-color: #fefce8; } /* Recreo */
-.tabla td:nth-child(5) { background-color: #fdf2f8; } /* No Lectivas */
+.tabla td:nth-child(2) {
+    background-color: #fffaf0;
+}
+
+/* HA */
+.tabla td:nth-child(3) {
+    background-color: #f0fdf4;
+}
+
+/* Lectivas */
+.tabla td:nth-child(4) {
+    background-color: #fefce8;
+}
+
+/* Recreo */
+.tabla td:nth-child(5) {
+    background-color: #fdf2f8;
+}
+
+/* No Lectivas */
+
+.no-resultados {
+    text-align: center;
+    padding: 3rem;
+    background: #f8fafc;
+    border-radius: 1rem;
+    border: 2px dashed var(--border);
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-top: 2rem;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 
 /* Responsividad para móviles */
 @media (max-width: 768px) {
-    .tabla th { display: none; }
+    .tabla th {
+        display: none;
+    }
+
     .tabla td {
         display: block;
         text-align: right;
@@ -184,21 +295,38 @@ body.buscando .tabla tr:not([style*="display: none"]) td:first-child {
         border-radius: 0 !important;
         padding: 0.75rem !important;
     }
+
     .tabla td::before {
         float: left;
         font-weight: 600;
         color: var(--text-muted);
         font-size: 0.8rem;
     }
-    .tabla td:nth-child(1)::before { content: "HC (Semanal):"; }
-    .tabla td:nth-child(2)::before { content: "Lectivas (HA):"; }
-    .tabla td:nth-child(3)::before { content: "Lectivas (HC):"; }
-    .tabla td:nth-child(4)::before { content: "Recreo:"; }
-    .tabla td:nth-child(5)::before { content: "No Lectivas:"; }
+
+    .tabla td:nth-child(1)::before {
+        content: "HC (Semanal):";
+    }
+
+    .tabla td:nth-child(2)::before {
+        content: "Lectivas (HA):";
+    }
+
+    .tabla td:nth-child(3)::before {
+        content: "Lectivas (HC):";
+    }
+
+    .tabla td:nth-child(4)::before {
+        content: "Recreo:";
+    }
+
+    .tabla td:nth-child(5)::before {
+        content: "No Lectivas:";
+    }
+
     .tabla tr {
         display: block;
         margin-bottom: 1.5rem;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
         border-radius: 1rem;
         overflow: hidden;
         border: 1px solid var(--border);
