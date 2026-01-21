@@ -27,6 +27,23 @@ body::before {
     z-index: -1;
 }
 
+<<<<<<< HEAD
+=======
+.back-link {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: #4CAF50;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: transform 0.2s ease;
+}
+
+.back-link:hover {
+    transform: translateX(-5px);
+}
+
+>>>>>>> 4439424d4bf332991980da5573d0d7d9f889a90b
 .main-container {
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(5px);
@@ -39,12 +56,22 @@ body::before {
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
+<<<<<<< HEAD
 h1, h2 {
+=======
+h1,
+h2 {
+>>>>>>> 4439424d4bf332991980da5573d0d7d9f889a90b
     text-align: center;
     color: #333;
 }
 
+<<<<<<< HEAD
 select, button {
+=======
+select,
+button {
+>>>>>>> 4439424d4bf332991980da5573d0d7d9f889a90b
     width: 100%;
     padding: 12px;
     margin-top: 15px;

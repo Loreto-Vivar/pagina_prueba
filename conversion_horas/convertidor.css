@@ -18,6 +18,23 @@ body {
     line-height: 1.5;
 }
 
+<<<<<<< HEAD
+=======
+.back-link {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: transform 0.2s ease;
+}
+
+.back-link:hover {
+    transform: translateX(-5px);
+}
+
+>>>>>>> 4439424d4bf332991980da5573d0d7d9f889a90b
 .contenedor {
     background-color: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(12px);
