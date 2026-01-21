@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Horas Específicas | Estudio CFT</title>
+    <link rel="stylesheet" href="especificas.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+</head>
+<body>
+
+<div class="background-decor">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+</div>
+
+<div class="contenedor">
+    <header>
+        <h1>Gestión de Horas Específicas</h1>
+        <p class="subtitle">Registro y Cálculo de Estudiantes PIE por Curso</p>
+    </header>
+
+    <!--Ingreso de los datos del colegio-->
+
+    <section class="card form-section">
+        <h2>Antecedentes del Establecimiento</h2>
+        <div class="input-grid">
+            <div class="form-group">
+                <label for="RBD">RBD del Establecimiento</label>
+                <input type="text" id="RBD" placeholder="Ej: XXXX-XX" required>
+            </div>
+            <div class="form-group">
+                <label for="escuelaNombre">Nombre del Establecimiento</label>
+                <input type="text" id="escuelaNombre" placeholder="Se completa automáticamente" readonly>
+            </div>
+        </div>
+
+        <input type="hidden" id="rbdOculto">
+        <input type="hidden" id="comunaOculta">
+        <input type="hidden" id="dependenciaOculta">
+
+        <hr style="margin: 2rem 0; border: 0; border-top: 1px solid var(--border-color);">
+
+
+
+        <!-- Ingreso de los datos de los estudiantes PIE-->
+        <h2>Registrar Información</h2>
+        <form id="formulario">
+            <div class="input-grid">
+                <div class="form-group">
+                    <!-- CURSOS-->
+                    <label for="curso">Seleccionar Curso</label>
+                    <select id="curso" required>
+                        <option value="" disabled selected>-- Seleccione --</option>
+                        <!-- Pre-Básica-->
+                        <option value="NT1">NT1 A</option>
+                        <option value="NT1">NT1 B</option>
+                        <option value="NT2">NT2 A</option>
+                        <option value="NT2">NT2 B</option>
+                        <!-- 1° Básico -->
+                        <option value="1° Básico A">1° Básico A</option>
+                        <option value="2° Básico B">1° Básico B</option>
+                        <option value="3° Básico C">1° Básico C</option>
+                        <!-- 2° Básico -->
+                        <option value="2° Básico A">2° Básico A</option>
+                        <option value="2° Básico B">2° Básico B</option>
+                        <option value="2° Básico C">2° Básico C</option>
+                        <!-- 3° Básico -->
+                        <option value="3° Básico A">3° Básico A</option>
+                        <option value="3° Básico B">3° Básico B</option>
+                        <option value="3° Básico C">3° Básico C</option>
+                        <!-- 4° Básico -->
+                        <option value="4° Básico A">4° Básico A</option>
+                        <option value="4° Básico B">4° Básico B</option>
+                        <option value="4° Básico C">4° Básico C</option>
+                        <!-- 5° Básico-->
+                        <option value="5° Básico A">5° Básico A</option>
+                        <option value="5° Básico B">5° Básico B</option>
+                        <option value="5° Básico C">5° Básico C</option>
+                        <!-- 6° Básico-->
+                        <option value="6° Básico A">6° Básico A</option>
+                        <option value="6° Básico B">6° Básico B</option>
+                        <option value="6° Básico C">6° Básico C</option>
+                        <!-- 7° Básico-->
+                        <option value="7° Básico A">7° Básico A</option>
+                        <option value="7° Básico B">7° Básico B</option>
+                        <option value="7° Básico C">7° Básico C</option>
+                        <!-- 8° Básico-->
+                        <option value="8° Básico A">8° Básico A</option>
+                        <option value="8° Básico B">8° Básico B</option>
+                        <option value="8° Básico C">8° Básico C</option>
+                        <!-- 1° Medio-->
+                        <option value="1° Medio A">1° Medio A</option>
+                        <option value="1° Medio B">1° Medio B</option>
+                        <option value="1° Medio C">1° Medio C</option>
+                        <option value="1° Medio D">1° Medio D</option>
+                        <option value="1° Medio E">1° Medio E</option>
+                        <!-- 2° Medio-->
+                        <option value="2° Medio A">2° Medio A</option>
+                        <option value="2° Medio B">2° Medio B</option>
+                        <option value="2° Medio C">2° Medio C</option>
+                        <option value="2° Medio D">2° Medio D</option>
+                        <option value="2° Medio E">2° Medio E</option>
+                        <!-- 3° Medio-->
+                        <option value="3° Medio A">3° Medio A</option>
+                        <option value="3° Medio B">3° Medio B</option>
+                        <option value="3° Medio C">3° Medio C</option>
+                        <option value="3° Medio D">3° Medio D</option>
+                        <option value="3° Medio E">3° Medio E</option>
+                        <!-- 4° Medio-->
+                        <option value="4° Medio A">4° Medio A</option>
+                        <option value="4° Medio B">4° Medio B</option>
+                        <option value="4° Medio C">4° Medio C</option>
+                        <option value="4° Medio D">4° Medio D</option>
+                        <option value="4° Medio E">4° Medio E</option>
+
+                    </select>
+                </div>
+                <!--Apartado desplegable para seleccionar con JEC o sin JEC-->
+                <div class="form-group">
+                    <label for="jec">JEC</label>
+                    <select id="jec" required>
+                        <option value="" disabled selected>-- Seleccione --</option>
+                        <option value="SI">SI</option> <!-- CON JEC-->
+                        <option value="NO">NO</option> <!-- SIN JEC-->
+                    </select>
+                </div>
+
+                <!-- Tabla superior principal-->
+
+                <div class="form-group">
+                    <label for="neet">Estudiantes NEET</label>
+                    <input type="number" id="neet" placeholder="Máx: 5" min="0" max="5" required>
+                </div>
+                <div class="form-group">
+                    <label for="neep">Estudiantes NEEP</label>
+                    <input type="number" id="neep" placeholder="Ej: 2" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="neepExcepcionales">NEEP Excepcionales</label>
+                    <input type="number" id="neepExcepcionales" placeholder="Ej: 1" min="0" required>
+                </div>
+            </div>
+            <button type="submit" class="btn-primary">
+                <span class="icon">+</span> Agregar al Registro
+            </button>
+        </form>
+    </section>
+
+    <!-- Encabezado de la tabla con JEC-->
+
+    <section class="card table-section">
+        <div class="table-header">
+            <div>
+                <h2>Registros Actuales</h2>
+                <p>Resumen detallado por nivel</p>
+            </div>
+            <div class="export-buttons">
+                <button id="btnExportPDF" class="btn-export btn-pdf">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                    PDF
+                </button>
+                <button id="btnExportExcel" class="btn-export btn-excel">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                    Excel
+                </button>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table id="tablaMaestra">
+                <thead>
+                    <tr>
+                        <th>Cursos</th>
+                        <th>JEC</th>
+                        <th>NEET</th>
+                        <th>NEEP</th>
+                        <th>NEEP Excepcionales</th>
+                        <th>Total de NEEP</th>
+                        <th>Total Postulados</th>
+                        <th>Horas Cronológicas Totales de Apoyo</th>
+                        <th>Horas Cronológicas Diferencial</th>
+                        <th>Horas Lectivas Diferencial</th>
+                        <th>Horas Cronológicas Profesional Asistente</th>
+                        <th>Horas Lectivas Profesional Asistente</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaDatos">
+                    <!-- Filas generadas dinámicamente -->
+                </tbody>
+                <tfoot id="tablaTotales">
+                    <tr class="row-totals">
+                        <td><strong>TOTALES</strong></td>
+                        <td>-</td>
+                        <td id="totalNEET">0</td>
+                        <td id="totalNEEP">0</td>
+                        <td id="totalNEEPEx">0</td>
+                        <td id="totalTNEEP">0</td>
+                        <td id="totalPostulados">0</td>
+                        <td id="totalApoyo">0h</td>
+                        <td id="totalCronoDif">0h</td>
+                        <td id="totalLectDif">0h</td>
+                        <td id="totalCronoProf">0h</td>
+                        <td id="totalPedagProf">0h</td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </section>
+</div>
+
+
+    <section id="infoJecSection" class="card info-section oculta">
+        <div class="table-header">
+            <h2 id="tituloInfoJec">Información de Referencia</h2>
+            <p>Valores base y cálculos según normativa</p>
+        </div>
+        <div class="table-responsive">
+            <!-- TABLA OCULTA CON JEC -->
+            <table id="tablaCONJEC" class="oculta CONJEC">
+
+                <!--Encabezado de la tabla CON JEC-->
+                <thead>
+                    <tr>
+                        <th>Cantidad de estudiantes NEEP</th>
+                        <th>Horas de apoyo total</th>
+                        <th>Horas cronológicas diferencial</th>
+                        <th>Horas pedagógicas diferencial</th>
+                        <th>Horas cronológicas profesionales</th>
+                        <th>Horas pedagógicas profesionales</th>
+                    </tr>
+                </thead>
+
+            <!--Tabla CON JEC-->
+                <tbody>
+                    <tr><td>0</td><td>10</td><td>6H</td><td>8</td><td>4H</td><td>5 + 15M</td></tr>
+                    <tr><td>1</td><td>13</td><td>8H 15M</td><td>11</td><td>4H 45M</td><td>6 + 15M</td></tr>
+                    <tr><td>2</td><td>16</td><td>10H 30M</td><td>14</td><td>5H 30M</td><td>7 + 15M</td></tr>
+                    <tr><td>3</td><td>19</td><td>12H 45M</td><td>17</td><td>6H 15M</td><td>8 + 15M</td></tr>
+                    <tr><td>4</td><td>22</td><td>15H</td><td>20</td><td>7H</td><td>9 + 15M</td></tr>
+                    <tr><td>5</td><td>25</td><td>17H 15M</td><td>23</td><td>7H 45M</td><td>10 + 15M</td></tr>
+                    <tr><td>6</td><td>28</td><td>19H 30M</td><td>26</td><td>8H 30M</td><td>11 + 15M</td></tr>
+                    <tr><td>7</td><td>31</td><td>21H 45M</td><td>29</td><td>9H 15M</td><td>12 + 15M</td></tr>
+                    <tr><td>8</td><td>34</td><td>24H</td><td>32</td><td>10H</td><td>13 + 15M</td></tr>
+                    <tr><td>9</td><td>37</td><td>26H 15M</td><td>35</td><td>10H 45M</td><td>14 + 15M</td></tr>
+                    <tr><td>10</td><td>40</td><td>28H 30M</td><td>38</td><td>11H 30M</td><td>15 + 15M</td></tr>
+                    <tr><td>11</td><td>43</td><td>30H 45M</td><td>41</td><td>12H 15M</td><td>6 + 15M</td></tr>
+                    <tr><td>12</td><td>46</td><td>33H</td><td>44</td><td>13H</td><td>7 + 15M</td></tr>
+                    <tr><td>13</td><td>49</td><td>35H 15M</td><td>47</td><td>13H 45M</td><td>8 + 15M</td></tr>
+                    <tr><td>14</td><td>52</td><td>37H 30M</td><td>50</td><td>14H 30M</td><td>9 + 15M</td></tr>
+                    <tr><td>15</td><td>55</td><td>39H 45M</td><td>53</td><td>15H 15M</td><td>10 + 15M</td></tr>
+                </tbody>
+            </table>
+
+            <!-- TABLA OCULTA SIN JEC -->
+            <table id="tablaSINJEC" class="oculta SINJEC">
+                <thead>
+                    <tr>
+                        <th>Cantidad de estudiantes NEEP</th>
+                        <th>Horas de apoyo total</th>
+                        <th>Horas cronológicas diferencial</th>
+                        <th>Horas pedagógicas diferencial</th>
+                        <th>Horas cronológicas profesionales</th>
+                        <th>Horas pedagógicas profesionales</th>
+                    </tr>
+                </thead>
+
+            <!--Tabla SIN JEC-->
+                <tbody>
+                    <tr><td>0</td><td>7</td><td>4H 30M</td><td>6</td><td>2H 30M</td><td>3 + 15M</td></tr>
+                    <tr><td>1</td><td>10</td><td>6H 45M</td><td>9</td><td>3H 15M</td><td>4 + 15M</td></tr>
+                    <tr><td>2</td><td>13</td><td>9H</td><td>12</td><td>4H</td><td>5 + 15M</td></tr>
+                    <tr><td>3</td><td>16</td><td>11H 15M</td><td>15</td><td>4H 45M</td><td>6 + 15M</td></tr>
+                    <tr><td>4</td><td>19</td><td>13H 30M</td><td>18</td><td>5H 30M</td><td>7 + 15M</td></tr>
+                    <tr><td>5</td><td>22</td><td>15H 45M</td><td>21</td><td>6H 15M</td><td>8 + 15M</td></tr>
+                    <tr><td>6</td><td>25</td><td>18H</td><td>24</td><td>7H</td><td>9 + 15M</td></tr>
+                    <tr><td>7</td><td>28</td><td>20H 15M</td><td>27</td><td>7H 45M</td><td>10 + 15M</td></tr>
+                    <tr><td>8</td><td>31</td><td>22H 30M</td><td>30</td><td>8H 30M</td><td>11 + 15M</td></tr>
+                    <tr><td>9</td><td>34</td><td>24H 45M</td><td>33</td><td>9H 15M</td><td>12 + 15M</td></tr>
+                    <tr><td>10</td><td>37</td><td>27H</td><td>36</td><td>10H</td><td>13 + 15M</td></tr>
+                    <tr><td>11</td><td>40</td><td>29H 15M</td><td>39</td><td>10H 45M</td><td>4 + 15M</td></tr>
+                    <tr><td>12</td><td>43</td><td>31H 30M</td><td>42</td><td>11H 30M</td><td>5 + 15M</td></tr>
+                    <tr><td>13</td><td>46</td><td>33H 45M</td><td>45</td><td>12H 15M</td><td>6 + 15M</td></tr>
+                    <tr><td>14</td><td>49</td><td>36H</td><td>48</td><td>13H</td><td>7 + 15M</td></tr>
+                    <tr><td>15</td><td>52</td><td>38H 15M</td><td>51</td><td>13H 45M</td><td>8 + 15M</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+
+<script src="especificas.js"></script>
+</body>
+</html>

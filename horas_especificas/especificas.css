@@ -1,0 +1,318 @@
+:root {
+    --primary: #818cf8;
+    --primary-dark: #6366f1;
+    --bg-light: #f8fafc;
+    --card-bg: #ffffff;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --border-color: #e2e8f0;
+    --accent-neet: #dcfce7;
+    --accent-neep: #fef9c3;
+    --accent-extra: #fee2e2;
+    --radius: 1rem;
+    --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* Background Decor */
+.background-decor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.15;
+}
+
+.blob-1 {
+    width: 400px;
+    height: 400px;
+    background: var(--primary);
+    top: -100px;
+    right: -100px;
+}
+
+.blob-2 {
+    width: 300px;
+    height: 300px;
+    background: #ec4899;
+    bottom: -50px;
+    left: -50px;
+}
+
+.contenedor {
+    width: 98%;
+    max-width: 100%;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 3rem;
+    animation: fadeInDown 0.8s ease-out;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    color: #0f172a;
+}
+
+.subtitle {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+}
+
+/* Cards */
+.card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    margin-bottom: 2rem;
+    border: 1px solid var(--border-color);
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.card h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Form Styles */
+.input-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+select, input {
+    padding: 0.75rem 1rem;
+    border-radius: 0.75rem;
+    border: 2px solid var(--border-color);
+    font-family: inherit;
+    font-size: 1rem;
+    transition: all 0.2s;
+    background-color: #f1f5f9;
+}
+
+select:focus, input:focus {
+    outline: none;
+    border-color: var(--primary);
+    background-color: #fff;
+    box-shadow: 0 0 0 4px rgba(129, 140, 248, 0.1);
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 1rem;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.4);
+}
+
+/* Table Styles */
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.export-buttons {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.btn-export {
+    padding: 0.6rem 1.2rem;
+    border-radius: 0.75rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: none;
+    color: white;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.btn-pdf {
+    background-color: #ef4444;
+}
+
+.btn-pdf:hover {
+    background-color: #dc2626;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 12px -2px rgba(239, 68, 68, 0.3);
+}
+
+.btn-excel {
+    background-color: #22c55e;
+}
+
+.btn-excel:hover {
+    background-color: #16a34a;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 12px -2px rgba(34, 197, 94, 0.3);
+}
+
+.table-responsive {
+    overflow-x: auto;
+    width: 100%;
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+th {
+    background: #f1f5f9;
+    padding: 0.75rem 0.5rem;
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-main);
+    border-bottom: 2px solid var(--border-color);
+    line-height: 1.2;
+    vertical-align: middle;
+}
+
+td {
+    padding: 0.75rem 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+/* Specific Cell Colors */
+.cell-neet { color: #059669; font-weight: 600; }
+.cell-neep { color: #b45309; font-weight: 600; }
+.cell-total { color: var(--primary-dark); font-weight: 700; font-size: 1.1rem; }
+.cell-total-postulados { color: #4f46e5; font-weight: 700; font-size: 1.1rem; }
+.cell-lectivas { background-color: #f0f9ff; color: #0369a1; font-weight: 700; }
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tr:hover td {
+    background-color: #f1f5f9;
+}
+
+.btn-delete {
+    padding: 0.5rem;
+    background: #fee2e2;
+    color: #ef4444;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-delete:hover {
+    background: #fecaca;
+    color: #dc2626;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 640px) {
+    .contenedor {
+        margin: 1.5rem auto;
+    }
+    h1 {
+        font-size: 1.75rem;
+    }
+}
+
+.oculta {
+    display: none;
+}
+
+.row-totals {
+    background-color: #f1f5f9;
+    border-top: 3px solid var(--primary);
+}
+
+.row-totals td {
+    font-weight: 800;
+    color: var(--text-main);
+    border-top: 2px solid var(--border-color);
+    background: #f8fafc;
+}
+
+#tablaTotales strong {
+    color: var(--primary-dark);
+}
